@@ -2,6 +2,12 @@ UIColor+extensions
 
 This project adds a new class category to UIColor to extend the class with more methods that will allow the use of setting hex string for color and setting gradient using color or image, also introduces some more color name options.
 
+The class that we are interested in is UIColor+extensions.h the rest of the project is just a demo to show how to use but it is very simple
+
+You can use it like
+
+[[self view] setBackgroundColor:[UIColor colorWithHex:@"FFF000"]]; // No need to use '#' but you can if you wish.
+
 + (UIColor *)colorWithHex:(NSString *)hexStr;
 + (UIColor *)colorWithHex:(NSString *)hexStr alpha:(CGFloat)alpha;
 + (UIColor *)colorWithGradientColorForTop:(id)topClr bottom:(id)bottomClr frame:(CGRect)frame;
