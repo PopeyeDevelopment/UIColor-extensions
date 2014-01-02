@@ -1,1 +1,22 @@
 UIColor+extensions
+
+This project adds a new class category to UIColor to extend the class with more methods that will allow the use of setting hex string for color and setting gradient using color or image, also introduces some more color name options.
+
++ (UIColor *)colorWithHex:(NSString *)hexStr;
++ (UIColor *)colorWithHex:(NSString *)hexStr alpha:(CGFloat)alpha;
++ (UIColor *)colorWithGradientColorForTop:(id)topClr bottom:(id)bottomClr frame:(CGRect)frame;
++ (UIImage *)colorWithGradientImageForTop:(id)topClr bottom:(id)bottomClr frame:(CGRect)frame;
+
++ (UIColor *)auburnColor;
++ (UIColor *)awesomeColor;
++ (UIColor *)ashColor;
++ (UIColor *)beigeColor;
++ (UIColor *)blondColor;
++ (UIColor *)blushColor;
++ (UIColor *)boneColor;
++ (UIColor *)bubbleGumColor;
++ (UIColor *)chocolateColor;
++ (UIColor *)champagneColor;
++ (UIColor *)coffeeColor;
++ (UIColor *)copperColor;
+
