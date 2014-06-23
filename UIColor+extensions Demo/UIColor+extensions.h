@@ -30,6 +30,10 @@
 + (UIColor *)colorWithGradientColorForTop:(id)topClr bottom:(id)bottomClr frame:(CGRect)frame;
 + (UIImage *)colorWithGradientImageForTop:(id)topClr bottom:(id)bottomClr frame:(CGRect)frame;
 
++ (UIColor *)randomColor;
++ (UIColor *)randomColorWithAlpha:(CGFloat)alpha;
++ (CGFloat)randomAlpha;
+
 + (UIColor *)auburnColor;
 + (UIColor *)awesomeColor;
 + (UIColor *)ashColor;
