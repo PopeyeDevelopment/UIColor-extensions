@@ -25,6 +25,7 @@
 
 @implementation UIColor (extensions)
 
+
 + (UIColor *)colorWithHex:(NSString *)hexStr
 {
     return [[self class] colorWithHex:hexStr alpha:1.0f];
@@ -85,6 +86,28 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return [self colorWithPatternImage:image];
+}
+
++ (UIColor *)randomColor
+{
+    return [self randomColorWithAlpha:1.0f];
+}
+
++ (UIColor *)randomColorWithAlpha:(CGFloat)alpha
+{
+    float red = ((float)arc4random()/ARC4RANDOM_MAX);
+    float green = ((float)arc4random()/ARC4RANDOM_MAX);
+    float blue = ((float)arc4random()/ARC4RANDOM_MAX);
+    
+    return [UIColor colorWithRed:red
+                           green:green
+                            blue:blue
+                           alpha:alpha];
+}
+
++ (CGFloat)randomAlpha
+{
+    return ((float)arc4random()/ARC4RANDOM_MAX);
 }
 
 + (UIColor *)auburnColor
