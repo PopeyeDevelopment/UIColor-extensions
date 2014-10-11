@@ -22,9 +22,28 @@
  */
 
 #import "UIColor+extensions.h"
-
+#define ARC4RANDOM_MAX 255
 @implementation UIColor (extensions)
 
+
++ (UIColor *)colorAtPoint:(CGPoint)point forView:(UIView *)view
+{
+    unsigned char pixel[4] = {0};
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(pixel, 1, 1, 8, 4, colorSpace, (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
+    
+    CGContextTranslateCTM(context, -point.x, -point.y);
+    
+    [view.layer renderInContext:context];
+    
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    
+    return [UIColor colorWithRed:pixel[0]/255.0
+                           green:pixel[1]/255.0
+                            blue:pixel[2]/255.0
+                           alpha:pixel[3]/255.0];
+}
 
 + (UIColor *)colorWithHex:(NSString *)hexStr
 {
@@ -56,6 +75,22 @@
     return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
 
++ (CAGradientLayer *)colorWithGradientForArrayOfColors:(NSArray *)colors frame:(CGRect)frame
+{
+    CAGradientLayer *layer = [CAGradientLayer layer];
+    [layer setFrame:frame];
+    NSMutableArray *refreshColors = [[NSMutableArray alloc] initWithCapacity:[colors count]];
+    for(id color in colors) {
+        if([color isKindOfClass:[UIColor class]]) {
+            [refreshColors addObject:(id)[color CGColor]];
+        }
+    }
+    [layer setColors:refreshColors];
+    [layer setStartPoint:CGPointMake(0.5f, 0.5f)];
+    [layer setEndPoint:CGPointMake(0.5f, 1.0f)];
+    return layer;
+}
+
 + (CAGradientLayer *)colorWithGradientForTop:(id)topClr bottom:(id)bottomClr frame:(CGRect)frame
 {
     CAGradientLayer *layer = [CAGradientLayer layer];
@@ -66,6 +101,17 @@
     [layer setStartPoint:CGPointMake(0.5f, 0.0f)];
     [layer setEndPoint:CGPointMake(0.5f, 1.0f)];
     return layer;
+}
+
+
++ (UIColor *)colorWithGradientWithArrayOfColors:(NSArray *)colors frame:(CGRect)frame
+{
+    CAGradientLayer *layer = [self colorWithGradientForArrayOfColors:colors frame:frame];
+    UIGraphicsBeginImageContext([layer frame].size);
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return [self colorWithPatternImage:image];
 }
 
 + (UIImage *)colorWithGradientImageForTop:(id)topClr bottom:(id)bottomClr frame:(CGRect)frame
@@ -95,9 +141,9 @@
 
 + (UIColor *)randomColorWithAlpha:(CGFloat)alpha
 {
-    float red = ((float)arc4random()/ARC4RANDOM_MAX);
-    float green = ((float)arc4random()/ARC4RANDOM_MAX);
-    float blue = ((float)arc4random()/ARC4RANDOM_MAX);
+    float red = ((float)arc4random_uniform(ARC4RANDOM_MAX)/255.0);
+    float green = ((float)arc4random_uniform(ARC4RANDOM_MAX)/255.0);
+    float blue = ((float)arc4random_uniform(ARC4RANDOM_MAX)/255.0);
     
     return [UIColor colorWithRed:red
                            green:green
@@ -107,7 +153,7 @@
 
 + (CGFloat)randomAlpha
 {
-    return ((float)arc4random()/ARC4RANDOM_MAX);
+    return ((float)arc4random_uniform(ARC4RANDOM_MAX)/255.0);
 }
 
 + (UIColor *)auburnColor

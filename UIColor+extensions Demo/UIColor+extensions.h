@@ -29,10 +29,13 @@
 + (UIColor *)colorWithHex:(NSString *)hexStr alpha:(CGFloat)alpha;
 + (UIColor *)colorWithGradientColorForTop:(id)topClr bottom:(id)bottomClr frame:(CGRect)frame;
 + (UIImage *)colorWithGradientImageForTop:(id)topClr bottom:(id)bottomClr frame:(CGRect)frame;
++ (UIColor *)colorWithGradientWithArrayOfColors:(NSArray *)colors frame:(CGRect)frame;
 
 + (UIColor *)randomColor;
 + (UIColor *)randomColorWithAlpha:(CGFloat)alpha;
 + (CGFloat)randomAlpha;
+
++ (UIColor *)colorAtPoint:(CGPoint)point forView:(UIView *)view;
 
 + (UIColor *)auburnColor;
 + (UIColor *)awesomeColor;
