@@ -151,7 +151,7 @@
                            alpha:alpha];
 }
 
-- (NSString *)hexFromUIColor:(UIColor *)color 
++ (NSString *)hexFromUIColor:(UIColor *)color
 {
     const CGFloat *components = CGColorGetComponents(color.CGColor);
 
