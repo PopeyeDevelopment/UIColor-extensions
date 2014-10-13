@@ -34,6 +34,7 @@
 + (UIColor *)randomColor;
 + (UIColor *)randomColorWithAlpha:(CGFloat)alpha;
 + (CGFloat)randomAlpha;
++ (NSString *)hexFromUIColor:(UIColor *)color;
 
 + (UIColor *)colorAtPoint:(CGPoint)point forView:(UIView *)view;
 
